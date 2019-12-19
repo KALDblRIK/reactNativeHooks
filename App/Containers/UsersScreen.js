@@ -1,15 +1,42 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { ScrollView, Text, Image, View, Button } from 'react-native'
+import UsersActions from '../Redux/UsersRedux'
 import { Images } from '../Themes'
 
 // Styles
 import styles from './Styles/UsersScreenStyles'
+import { connect } from 'react-redux';
 
-export default function UsersScreen() {
-  const [count, setCount] = useState(0);
+function UsersScreen(props) {
+  const {
+    users,
+    getUsers,
+  } = props;
+
+  useEffect(() => {
+    getUsers();
+    console.warn('tick')
+  }, [users !== []])
+
   return (
-    <View style={styles.mainContainer}>
-      <Button title={`Pressed ${count} times`} onPress={() => setCount(count + 1)} />
-    </View>
+    <ScrollView style={styles.mainContainer}>
+      <Text style={styles.text}>
+        {JSON.stringify(users.data)}
+      </Text>
+    </ScrollView>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: () => dispatch(UsersActions.usersRequest()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersScreen)
