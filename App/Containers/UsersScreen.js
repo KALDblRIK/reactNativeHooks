@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
-import { ScrollView, Text, Image, View, Button, FlatList } from 'react-native'
-import { Content } from 'native-base'
+import { ScrollView, FlatList } from 'react-native'
+import { Container, Content, Text, View, Button, } from 'native-base'
 import UsersActions from '../Redux/UsersRedux'
 import { Images } from '../Themes'
 
@@ -13,6 +13,7 @@ function UsersScreen(props) {
   const {
     users,
     getUsers,
+    navigation,
   } = props;
 
   useEffect(() => {
@@ -34,13 +35,18 @@ function UsersScreen(props) {
   }
 
   return (
-    <Content style={styles.mainContainer}>
-      <FlatList
-        data={users.data}
-        keyExtractor={(item) => item.id.toString() }
-        renderItem={renderItem}
-      />
-    </Content>
+    <Container style={styles.mainContainer}>
+        <FlatList
+          data={users.data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+        />
+      <Button onPress={() => navigation.navigate('LoginScreen')} full>
+        <Text>
+          Login
+        </Text>
+      </Button>
+    </Container>
   )
 }
 
