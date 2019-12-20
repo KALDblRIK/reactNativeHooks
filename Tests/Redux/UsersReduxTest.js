@@ -8,19 +8,18 @@ test('request', () => {
   expect(state.error).toBe(false)
 })
 
-// test('success', () => {
-//   const avatar = 'http://placekitten.com/200/300'
-//   const state = reducer(INITIAL_STATE, Actions.userSuccess(avatar))
+test('success', () => {
+  const state = reducer(INITIAL_STATE, Actions.usersSuccess())
 
-//   expect(state.fetching).toBe(false)
-//   expect(state.avatar).toBe(avatar)
-//   expect(state.error).toBeNull()
-// })
+  expect(state.fetching).toBe(false)
+  expect(state.data).toEqual(undefined)
+  expect(state.error).toBe(false)
+})
 
-// test('failure', () => {
-//   const state = reducer(INITIAL_STATE, Actions.userFailure())
+test('failure', () => {
+  const state = reducer(INITIAL_STATE, Actions.usersFailure())
 
-//   expect(state.fetching).toBe(false)
-//   expect(state.error).toBe(true)
-//   expect(state.avatar).toBeNull()
-// })
+  expect(state.fetching).toBe(false)
+  expect(state.error).toBe(true)
+  expect(state.data).toEqual([])
+})

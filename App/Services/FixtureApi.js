@@ -5,8 +5,8 @@ export default {
       data: require('../Fixtures/users.json')
     }
   },
-  postAuth: (params) => {
-    if (params.username === 'login' && params.password === 'login') {
+  postAuth: ({username, password}) => {
+    if (username === 'login' && password === 'login') {
       return {
         ok: true,
         data: 'success',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
   Button,
@@ -10,18 +10,26 @@ import {
   Text,
 } from 'native-base'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import AuthActions from '../Redux/AuthRedux'
 
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {
+    auth,
+    postAuth,
+  } = props
 
   const submit = () => {
-    console.warn(username, password)
+    postAuth({ username, password });
   }
+
+  useEffect(() => {
+    console.warn(auth)
+  }, [auth.isAuth])
 
   return (
     <Container style={styles.container}>
@@ -58,11 +66,13 @@ const LoginScreen = () => {
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.auth,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    postAuth: (params) => dispatch(AuthActions.authRequest(params)),
   }
 }
 
