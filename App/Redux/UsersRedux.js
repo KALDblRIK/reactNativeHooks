@@ -23,7 +23,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 // request the avatar for a user
-export const request = (state, { username }) =>
+export const request = (state) =>
   state.merge({ fetching: true, error: false, data: [] })
 
 export const success = (state, action) => {

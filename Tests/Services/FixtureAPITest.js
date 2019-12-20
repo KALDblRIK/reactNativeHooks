@@ -20,3 +20,22 @@ test('FixtureAPI getUsers returns the right file', () => {
     data: expectedFile
   })
 })
+
+test('FixtureAPI postAuth', () => {
+  const okAuthParams = {
+    username: 'login',
+    password: 'login',
+  }
+  expect(FixtureAPI.postAuth(okAuthParams)).toEqual({
+    ok: true,
+    data: 'success'
+  })
+  const wrongAuthParams = {
+    username: '',
+    password: '',
+  }  
+  expect(FixtureAPI.postAuth(wrongAuthParams)).toEqual({
+    ok: false,
+    data: 'wrong username or password'
+  })
+})
