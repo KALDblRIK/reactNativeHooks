@@ -1,36 +1,42 @@
 import React, { Component } from 'react'
 import { Button, Text } from 'native-base'
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation'
 import UsersScreen from '../Containers/UsersScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import i18n from '../I18n';
+import {
+  createStackNavigator,
+  createAppContainer,
+  createSwitchNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 
 const PublicNavigator = createStackNavigator({
-  UsersScreen: {
-    screen: UsersScreen,
-    navigationOptions: {
-      headerTitle: i18n.t('HEADER_USERS'),
-      headerStyle: styles.header,
-    }
-  },
-  LoginScreen: {
-    screen: LoginScreen,
-    navigationOptions: {
-      headerTitle: i18n.t('HEADER_LOGIN'),
-      headerStyle: styles.header,
-    }
-  }
+  PublicUsers: UsersScreen,
+  PublicLogin: LoginScreen,
 }, {
-  headerMode: 'screen',
-  initialRouteName: 'UsersScreen',
+  defaultNavigationOptions: {
+    headerStyle: styles.header,
+  }
+})
+
+const PrivateNavigator = createBottomTabNavigator({
+  PrivateUsers: createStackNavigator({
+    Users: UsersScreen,
+  }),
+  // UsersScreen,
+}, {
+  // defaultNavigationOptions: {
+  //   headerStyle: styles.header,
+  // },
 })
 
 const MainNavigation = createSwitchNavigator({
   Public: PublicNavigator,
+  Private: PrivateNavigator,
 });
 
 export default createAppContainer(MainNavigation)

@@ -11,6 +11,7 @@ import {
 } from 'native-base'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import AuthActions from '../Redux/AuthRedux'
+import i18n from '../I18n';
 
 // Styles
 import styles from './Styles/LoginScreenStyle'
@@ -21,6 +22,7 @@ const LoginScreen = (props) => {
   const {
     auth,
     postAuth,
+    navigation,
   } = props
 
   const submit = () => {
@@ -28,7 +30,9 @@ const LoginScreen = (props) => {
   }
 
   useEffect(() => {
-    console.warn(auth)
+    if (auth.isAuth) {
+      navigation.navigate('PrivateUsers')
+    }
   }, [auth.isAuth])
 
   return (
@@ -62,6 +66,13 @@ const LoginScreen = (props) => {
       </Content>
     </Container>
   )
+}
+
+LoginScreen.navigationOptions = props => {
+  const { navigation } = props
+  return {
+    headerTitle: i18n.t('HEADER_LOGIN'),
+  }
 }
 
 const mapStateToProps = (state) => {

@@ -1,6 +1,4 @@
 import React, { Component, useState, useEffect } from 'react'
-import { ScrollView, FlatList } from 'react-native'
-import { Container, Content, Text, View, Button, } from 'native-base'
 import UsersActions from '../Redux/UsersRedux'
 import { Images } from '../Themes'
 
@@ -8,13 +6,35 @@ import { Images } from '../Themes'
 import styles from './Styles/UsersScreenStyles'
 import { connect } from 'react-redux'
 import UserCard from '../Components/UserCard'
+import i18n from '../I18n';
+
+import {
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+ } from 'react-native'
+
+import {
+  Container,
+  Content,
+  Text,
+  View,
+  Icon,
+ } from 'native-base'
 
 function UsersScreen(props) {
   const {
+    auth,
     users,
     getUsers,
     navigation,
   } = props;
+
+  useEffect(() => {
+    if (auth.isAuth) {
+      navigation.navigate('PrivateUsers')
+    }
+  }, [auth.isAuth])
 
   useEffect(() => {
     getUsers();
@@ -36,23 +56,41 @@ function UsersScreen(props) {
 
   return (
     <Container style={styles.mainContainer}>
-        <FlatList
-          data={users.data}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
-        />
-      <Button onPress={() => navigation.navigate('LoginScreen')} full>
-        <Text>
-          Login
-        </Text>
-      </Button>
+      <FlatList
+        data={users.data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
     </Container>
   )
+}
+
+UsersScreen.navigationOptions = props => {
+  const {
+    auth,
+    navigation,
+  } = props
+  console.warn(navigation.state.routeName)
+  return {
+    headerTitle: i18n.t('HEADER_USERS'),
+    headerRight: (
+      <TouchableOpacity
+        onPress={() => navigation.navigate('PublicLogin')}
+        style={styles.headerButton}
+      >
+        <Icon
+          name={navigation.state.routeName === 'Users' ? 'log-out' : 'log-in'}
+        />
+      </TouchableOpacity>
+    ),
+    tabBarVisible: true,
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
     users: state.users,
+    auth: state.auth,
   }
 }
 
