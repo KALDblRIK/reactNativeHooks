@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Text } from 'native-base'
 import UsersScreen from '../Containers/UsersScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import CardsScreen from '../Containers/CardsScreen'
 import i18n from '../I18n';
 import {
   createStackNavigator,
@@ -27,11 +28,9 @@ const PrivateNavigator = createBottomTabNavigator({
   PrivateUsers: createStackNavigator({
     Users: UsersScreen,
   }),
-  // UsersScreen,
-}, {
-  // defaultNavigationOptions: {
-  //   headerStyle: styles.header,
-  // },
+  PrivateCards: createStackNavigator({
+    Cards: CardsScreen,
+  }),
 })
 
 const MainNavigation = createSwitchNavigator({

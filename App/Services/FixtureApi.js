@@ -5,7 +5,7 @@ export default {
       data: require('../Fixtures/users.json')
     }
   },
-  postAuth: ({username, password}) => {
+  postAuth: ({username, password})=> {
     if (username === 'login' && password === 'login') {
       return {
         ok: true,
@@ -16,5 +16,11 @@ export default {
       ok: false,
       data: 'wrong username or password'
     }
-  }
+  },
+  getCards: () => {
+    return {
+      ok: true,
+      data: require('../Fixtures/cards.json')
+    }
+  },
 }

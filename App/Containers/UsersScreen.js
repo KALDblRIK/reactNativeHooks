@@ -74,7 +74,7 @@ function UsersScreen(props) {
         style={styles.headerButton}
       >
         <Text>
-          {auth && auth.isAuth ? 'Logout' : 'Login'}
+          {auth && auth.isAuth ? i18n.t('BUTTON_LOGOUT') : i18n.t('BUTTON_LOGIN')}
         </Text>
       </Button>
     </Container>
@@ -82,11 +82,6 @@ function UsersScreen(props) {
 }
 
 UsersScreen.navigationOptions = props => {
-  const {
-    auth,
-    navigation,
-  } = props
-  const isPrivate = navigation.state.routeName === 'Users'
   return {
     headerTitle: i18n.t('HEADER_USERS'),
     tabBarVisible: true,

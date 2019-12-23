@@ -1,6 +1,7 @@
 {
   "HEADER_USERS": "Пользователи",
   "HEADER_LOGIN": "Авторизация",
+  "HEADER_CARDS": "Карточки",
   "ADDRESS": "Адрес",
   "COMPANY": "Компания",
   "CITY": "Город",
@@ -10,5 +11,7 @@
   "LAT": "Широта",
   "LNG": "Долгота",
   "NAME": "Название",
-  "CATCH_PHRASE": "Слоган"
+  "CATCH_PHRASE": "Слоган",
+  "BUTTON_LOGIN": "Войти",
+  "BUTTON_LOGOUT": "Выйти"
 }

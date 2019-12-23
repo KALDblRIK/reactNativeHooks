@@ -36,6 +36,7 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
   //
   const getUsers = () => api.get('users')
   const postAuth = (params) => api.post('auth', params)
+  const getCards = () => api.get('photos')
   // const getPhotos = () => api.get('photos')
 
   // ------
@@ -54,6 +55,7 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
     // a list of the API functions from step 2
     getUsers,
     postAuth,
+    getCards,
     // getPhotos,
   }
 }

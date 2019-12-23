@@ -33,9 +33,18 @@ test('FixtureAPI postAuth', () => {
   const wrongAuthParams = {
     username: '',
     password: '',
-  }  
+  }
   expect(FixtureAPI.postAuth(wrongAuthParams)).toEqual({
     ok: false,
     data: 'wrong username or password'
+  })
+})
+
+test('FixtureAPI getCards returns the right file', () => {
+  const expectedFile = require('../../App/Fixtures/cards.json')
+
+  expect(FixtureAPI.getCards()).toEqual({
+    ok: true,
+    data: expectedFile
   })
 })
