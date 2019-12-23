@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Text } from 'native-base'
+import { Icon, Text } from 'native-base'
 import UsersScreen from '../Containers/UsersScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import CardsScreen from '../Containers/CardsScreen'
@@ -27,9 +27,35 @@ const PublicNavigator = createStackNavigator({
 const PrivateNavigator = createBottomTabNavigator({
   PrivateUsers: createStackNavigator({
     Users: UsersScreen,
+  }, {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        return (
+          <Icon style={{color: tintColor}} name="contact" />
+        )
+      },
+      tabBarLabel: ({ focused, tintColor }) => {
+        return focused
+        ? <Text style={{textAlign: 'center', color: tintColor }}>{i18n.t('HEADER_USERS')}</Text>
+        : null
+      }
+    })
   }),
   PrivateCards: createStackNavigator({
     Cards: CardsScreen,
+  }, {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        return (
+          <Icon style={{color: tintColor}} name="images" />
+        )
+      },
+      tabBarLabel: ({ focused, tintColor }) => {
+        return focused
+        ? <Text style={{textAlign: 'center', color: tintColor }}>{i18n.t('HEADER_CARDS')}</Text>
+        : null
+      }
+    })
   }),
 }, {
   lazy: true
