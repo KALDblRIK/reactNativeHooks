@@ -13,5 +13,8 @@
   "NAME": "Название",
   "CATCH_PHRASE": "Слоган",
   "BUTTON_LOGIN": "Войти",
-  "BUTTON_LOGOUT": "Выйти"
+  "BUTTON_LOGOUT": "Выйти",
+  "ALBUM_ID": "ID альбома",
+  "USERNAME": "Имя пользователя",
+  "PASSWORD": "Пароль"
 }

@@ -43,7 +43,7 @@ const LoginScreen = (props) => {
             <Input
               value={username}
               onChangeText={(text) => setUsername(text)}
-              placeholder="Username"
+              placeholder={i18n.t('USERNAME')}
             />
           </Item>
           <Item last>
@@ -51,7 +51,7 @@ const LoginScreen = (props) => {
               value={password}
               secureTextEntry
               onChangeText={(text) => setPassword(text)}
-              placeholder="Password"
+              placeholder={i18n.t('PASSWORD')}
             />
           </Item>
           <Button
@@ -59,7 +59,7 @@ const LoginScreen = (props) => {
             onPress={submit}
           >
             <Text>
-              Login
+              {i18n.t('BUTTON_LOGIN')}
             </Text>
           </Button>
         </Form>

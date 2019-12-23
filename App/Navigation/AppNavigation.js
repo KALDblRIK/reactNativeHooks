@@ -31,6 +31,8 @@ const PrivateNavigator = createBottomTabNavigator({
   PrivateCards: createStackNavigator({
     Cards: CardsScreen,
   }),
+}, {
+  lazy: true
 })
 
 const MainNavigation = createSwitchNavigator({

@@ -8,12 +8,14 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { UsersTypes } from '../Redux/UsersRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
+import { CardsTypes } from '../Redux/CardsRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUsers } from './UsersSagas'
 import { postAuth, clearAuth } from './AuthSagas'
+import { getCards } from './CardsSagas'
 
 /* ------------- API ------------- */
 
@@ -31,6 +33,6 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     takeLatest(UsersTypes.USERS_REQUEST, getUsers, api),
     takeLatest(AuthTypes.AUTH_REQUEST, postAuth, api),
-    // takeLatest(AuthTypes.AUTH_CLEAR, clearAuth)
+    takeLatest(CardsTypes.CARDS_REQUEST, getCards, api),
   ])
 }

@@ -12,7 +12,6 @@ import i18n from '../I18n';
 import {
   ScrollView,
   FlatList,
-  TouchableOpacity,
  } from 'react-native'
 
 import {
@@ -38,8 +37,10 @@ function UsersScreen(props) {
   }, [auth.isAuth])
 
   useEffect(() => {
-    getUsers();
-  }, [users.data !== []])
+    console.warn('getUsers')
+    getUsers()
+
+  }, [])
 
   const renderItem = ({ item, index }) => {
     return (
