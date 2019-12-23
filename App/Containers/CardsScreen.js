@@ -27,7 +27,6 @@ const CardsScreen = (props) => {
   const [filterValue, setFilterValue] = useState('')
 
   useEffect(() => {
-    console.warn('getCards')
     getCards()
   }, [])
 

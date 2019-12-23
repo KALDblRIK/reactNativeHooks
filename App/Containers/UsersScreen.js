@@ -37,9 +37,7 @@ function UsersScreen(props) {
   }, [auth.isAuth])
 
   useEffect(() => {
-    console.warn('getUsers')
     getUsers()
-
   }, [])
 
   const renderItem = ({ item, index }) => {
