@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { path } from 'ramda'
-import AuthActions from '../Redux/AuthRedux'
+import AuthActions, { clear } from '../Redux/AuthRedux'
 import FixtureAPI from '../../App/Services/FixtureApi'
 
 export function * postAuth (api, action) {
@@ -16,4 +16,8 @@ export function * postAuth (api, action) {
   } else {
     yield put(AuthActions.authFailure())
   }
+}
+
+export function * clearAuth (action) {
+  yield put(AuthActions.authClear())
 }

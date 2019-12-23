@@ -13,7 +13,7 @@ import { AuthTypes } from '../Redux/AuthRedux'
 
 import { startup } from './StartupSagas'
 import { getUsers } from './UsersSagas'
-import { postAuth } from './AuthSagas'
+import { postAuth, clearAuth } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -30,6 +30,7 @@ export default function * root () {
 
     // some sagas receive extra parameters in addition to an action
     takeLatest(UsersTypes.USERS_REQUEST, getUsers, api),
-    takeLatest(AuthTypes.AUTH_REQUEST, postAuth, api)
+    takeLatest(AuthTypes.AUTH_REQUEST, postAuth, api),
+    // takeLatest(AuthTypes.AUTH_CLEAR, clearAuth)
   ])
 }

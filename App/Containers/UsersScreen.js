@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import UsersActions from '../Redux/UsersRedux'
+import AuthActions from '../Redux/AuthRedux'
 import { Images } from '../Themes'
 
 // Styles
@@ -20,6 +21,7 @@ import {
   Text,
   View,
   Icon,
+  Button,
  } from 'native-base'
 
 function UsersScreen(props) {
@@ -28,12 +30,11 @@ function UsersScreen(props) {
     users,
     getUsers,
     navigation,
+    clearAuth,
   } = props;
 
   useEffect(() => {
-    if (auth.isAuth) {
-      navigation.navigate('PrivateUsers')
-    }
+    navigation.navigate(auth.isAuth ? 'PrivateUsers' : 'PublicUsers')
   }, [auth.isAuth])
 
   useEffect(() => {
@@ -61,6 +62,21 @@ function UsersScreen(props) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
       />
+      <Button
+        full
+        onPress={
+          auth && auth.isAuth
+          ? () => {
+            clearAuth()
+          }
+          : () => navigation.navigate('PublicLogin')
+        }
+        style={styles.headerButton}
+      >
+        <Text>
+          {auth && auth.isAuth ? 'Logout' : 'Login'}
+        </Text>
+      </Button>
     </Container>
   )
 }
@@ -70,19 +86,9 @@ UsersScreen.navigationOptions = props => {
     auth,
     navigation,
   } = props
-  console.warn(navigation.state.routeName)
+  const isPrivate = navigation.state.routeName === 'Users'
   return {
     headerTitle: i18n.t('HEADER_USERS'),
-    headerRight: (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('PublicLogin')}
-        style={styles.headerButton}
-      >
-        <Icon
-          name={navigation.state.routeName === 'Users' ? 'log-out' : 'log-in'}
-        />
-      </TouchableOpacity>
-    ),
     tabBarVisible: true,
   }
 }
@@ -97,6 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUsers: () => dispatch(UsersActions.usersRequest()),
+    clearAuth: () => dispatch(AuthActions.authClear())
   }
 }
 

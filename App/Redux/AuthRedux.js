@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   authRequest: ['params'],
   authSuccess: null,
-  authFailure: null
+  authFailure: null,
+  authClear: null,
 })
 
 export const AuthTypes = Types
@@ -35,10 +36,16 @@ export const success = (state, action) => {
 export const failure = state =>
   state.merge({ fetching: false, error: true, isAuth: false })
 
+export const clear = state => {
+  // console.error('clear')
+  return state.merge({ fetching: false, error: false, isAuth: false })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_REQUEST]: request,
   [Types.AUTH_SUCCESS]: success,
-  [Types.AUTH_FAILURE]: failure
+  [Types.AUTH_FAILURE]: failure,
+  [Types.AUTH_CLEAR]: clear,
 })
